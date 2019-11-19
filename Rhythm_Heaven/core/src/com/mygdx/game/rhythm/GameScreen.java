@@ -24,6 +24,7 @@ public class GameScreen implements Screen{
 	public static int BUTTON_HEIGHT = (int)(531 / 1.5);
 	
 	boolean effectSound = false;
+	boolean fail = false;
 	
 	RhythmHeaven rhythm;
 	
@@ -43,10 +44,18 @@ public class GameScreen implements Screen{
 	@Override
 	public void render(float delta) {
 		timer += delta;
+		
+//		System.out.println(fail);
+		
 		Gdx.gl.glClearColor(1.0f, 1.0f, 1.0f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
+		
 		rhythm.batch.begin();
+		
+		if(timer > ((int)(timer / beat) * beat) - beat / 7 && timer < ((int)(timer / beat) * beat) + beat / 7){
+			fail = false;			
+		}
 		
 		if(Gdx.input.isKeyPressed(Keys.ANY_KEY)){
 			rhythm.batch.draw(GameButton[1], rhythm.WIDTH / 2 - BUTTON_WIDTH / 2, (rhythm.HEIGHT / 2 - BUTTON_HEIGHT / 2) - 50, BUTTON_WIDTH, BUTTON_HEIGHT);
@@ -69,13 +78,21 @@ public class GameScreen implements Screen{
 			}
 			
 			// 판정 부분
-			if(touch > (((int)(timer / beat) * beat) - beat / 4) && touch < (((int)(timer / beat) * beat) + beat / 4)) {
+			if(touch < (((int)(timer / beat) * beat) - beat / 2) && touch > (((int)(timer / beat) * beat) - beat)){
+				fail = true;				
+			} 
+			
+			if(touch > (((int)(timer / beat) * beat) - beat / 4) && touch < (((int)(timer / beat) * beat) + beat / 4) && fail == false) {
 				score += 2;
+				fail = true;
 				System.out.println("perfect");
+				System.out.println(fail);
 				System.out.println(score);
-			} else if(touch > (((int)(timer / beat) * beat) - beat / 2) && touch < (((int)(timer / beat) * beat) + beat / 2)) {
+			} else if(touch > (((int)(timer / beat) * beat) - beat / 2) && touch < (((int)(timer / beat) * beat) + beat / 2) && fail == false) {
 				score += 1;
+				fail = true;
 				System.out.println("good");
+				System.out.println(fail);
 				System.out.println(score);
 			}
 		}
