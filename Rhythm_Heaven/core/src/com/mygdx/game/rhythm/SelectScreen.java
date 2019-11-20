@@ -19,6 +19,8 @@ public class SelectScreen implements Screen{
 	
 	Sound pokemon = Gdx.audio.newSound(Gdx.files.internal("pokemon.mp3"));
 	Sound kirby = Gdx.audio.newSound(Gdx.files.internal("kirby.mp3"));
+	Sound joker = Gdx.audio.newSound(Gdx.files.internal("joker.mp3"));
+	Sound lockstep = Gdx.audio.newSound(Gdx.files.internal("lockstep.mp3"));
 	
 	public int select = 0;
 	public int music;
@@ -46,12 +48,26 @@ public class SelectScreen implements Screen{
 		Gdx.gl.glClearColor(1.0f, 1.0f, 1.0f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
+		if(Gdx.input.isKeyJustPressed(Keys.ENTER)) {
+			pokemon.dispose();
+			kirby.dispose();
+			joker.dispose();
+			lockstep.dispose();
+			
+			rhythm.setScreen(new GameScreen(rhythm, select));
+		}
+		
 		if(Gdx.input.isKeyJustPressed(Keys.RIGHT)) {
-			select++;
-			cnt = 0;
+			if(select < 3) {
+				select++;
+				cnt = 0;
+			}			
+			
 		} else if(Gdx.input.isKeyJustPressed(Keys.LEFT)) {
-			select--;
-			cnt = 0;
+			if(select > 0) {
+				select--;
+				cnt = 0;
+			}
 		}
 		
 		rhythm.batch.begin();
@@ -62,21 +78,51 @@ public class SelectScreen implements Screen{
 			if(cnt == 0) {
 				pokemon.play();
 				kirby.pause();
+				joker.pause();
+				lockstep.pause();
 			}
 			cnt = 1;
 			
 			break;
 		case 1:
-			
+			rhythm.batch.draw(new Texture("kirby.png"), rhythm.WIDTH / 2 - WIDTH / 2 + 150, rhythm.HEIGHT / 2 - HEIGHT / 2 + 180, REAL_WIDTH, REAL_HEIGHT);
 			if(cnt == 0) {
 				pokemon.pause();
 				kirby.play();
+				joker.pause();
+				lockstep.pause();
 			}
 			cnt = 1;
+			
+			break;
+			
+		case 2:
+			rhythm.batch.draw(new Texture("joker.png"), rhythm.WIDTH / 2 - WIDTH / 2 + 150, rhythm.HEIGHT / 2 - HEIGHT / 2 + 180, REAL_WIDTH, REAL_HEIGHT);
+			if(cnt == 0) {
+				pokemon.pause();
+				kirby.pause();
+				joker.play();
+				lockstep.pause();
+			}
+			cnt = 1;
+			
+			break;
+			
+		case 3:
+			rhythm.batch.draw(new Texture("lockstep.png"), rhythm.WIDTH / 2 - WIDTH / 2 + 150, rhythm.HEIGHT / 2 - HEIGHT / 2 + 180, REAL_WIDTH, REAL_HEIGHT);
+			if(cnt == 0) {
+				pokemon.pause();
+				kirby.pause();
+				joker.pause();
+				lockstep.play();
+			}
+			cnt = 1;
+			
+			break;
+			
 		}
 		
 		rhythm.batch.end();
-		
 	}
 
 	@Override

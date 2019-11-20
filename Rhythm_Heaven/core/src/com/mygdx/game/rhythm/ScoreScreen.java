@@ -8,9 +8,13 @@ import com.mygdx.game.RhythmHeaven;
 public class ScoreScreen implements Screen{
 	
 	RhythmHeaven rhythm;
+	int score;
+	int beat;
 	
-	ScoreScreen(RhythmHeaven rhythm){
+	ScoreScreen(RhythmHeaven rhythm, int score, int beat){
 		this.rhythm = rhythm;
+		this.score = score;
+		this.beat = beat;
 	}
 
 	@Override

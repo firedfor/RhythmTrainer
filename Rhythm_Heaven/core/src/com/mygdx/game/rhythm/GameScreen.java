@@ -10,35 +10,61 @@ import com.mygdx.game.RhythmHeaven;
 
 public class GameScreen implements Screen{
 	
-//	Sound dong = Gdx.audio.newSound(Gdx.files.internal("dong.ogg"));
-//	Sound ka = Gdx.audio.newSound(Gdx.files.internal("ka.ogg"));
-	Sound music = Gdx.audio.newSound(Gdx.files.internal("title.mp3"));
-	
+	RhythmHeaven rhythm;
 	Texture[] GameButton = new Texture[2];
+	int select;
+	public float beat;
+	
+	Sound pokemon = Gdx.audio.newSound(Gdx.files.internal("pokemon.mp3"));
+	Sound kirby = Gdx.audio.newSound(Gdx.files.internal("kirby.mp3"));
+	Sound joker = Gdx.audio.newSound(Gdx.files.internal("joker.mp3"));
+	Sound lockstep = Gdx.audio.newSound(Gdx.files.internal("lockstep.mp3"));
+	
+	Sound dong = Gdx.audio.newSound(Gdx.files.internal("dong.ogg"));
+	Sound ka = Gdx.audio.newSound(Gdx.files.internal("ka.ogg"));
+	
+	public GameScreen(RhythmHeaven rhythm, int select) {
+		this.rhythm = rhythm;
+		GameButton[0] = new Texture("GameButtonUn.png");
+		GameButton[1] = new Texture("GameButtonOn.png");
+		this.select = select;
+		
+		switch(select) {
+		case 0:
+			pokemon.play();
+			beat = 0.6741f;
+			break;
+		
+		case 1:
+			kirby.play();
+			beat = 0.7044f;
+			break;
+			
+		case 2:
+			joker.play();
+			beat = 0.6147f;
+			break;
+			
+		case 3:
+			lockstep.play();
+			beat = 0.3703f;
+			break;
+		}
+	}
+	
 	public int score;
-	public float timer;
-//	public float beat = 0.6f;
+	public float timer;	
 	public float touch;
 	public float songLength = 30.0f;
 	public static int BUTTON_WIDTH = (int)(772 / 1.5);
 	public static int BUTTON_HEIGHT = (int)(531 / 1.5);
 	
 	boolean effectSound = false;
-	boolean fail = false;
-	
-	RhythmHeaven rhythm;
-	
-	public GameScreen(RhythmHeaven rhythm) {
-		this.rhythm = rhythm;
-		GameButton[0] = new Texture("GameButtonUn.png");
-		GameButton[1] = new Texture("GameButtonOn.png");
-		music.play();
-	}
+	boolean fail = false;	
 
 	@Override
 	public void show() {
-		// TODO Auto-generated method stub
-		System.out.println();
+		
 	}
 
 	@Override
@@ -95,6 +121,10 @@ public class GameScreen implements Screen{
 			}
 		}
 		rhythm.batch.end();
+		
+		if(timer >= songLength) {
+			rhythm.setScreen(new ScoreScreen(rhythm, score, (int) (songLength / beat)));
+		}
 	}
 
 	@Override
