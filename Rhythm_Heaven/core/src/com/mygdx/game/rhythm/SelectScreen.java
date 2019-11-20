@@ -11,6 +11,9 @@ import com.mygdx.game.RhythmHeaven;
 public class SelectScreen implements Screen{
 	
 	RhythmHeaven rhythm;
+	
+	Sound dong = Gdx.audio.newSound(Gdx.files.internal("dong.ogg"));
+	Sound ka = Gdx.audio.newSound(Gdx.files.internal("ka.ogg"));
 
 	public static int WIDTH = 577;
 	public static int HEIGHT = 814;
@@ -23,6 +26,7 @@ public class SelectScreen implements Screen{
 	Sound lockstep = Gdx.audio.newSound(Gdx.files.internal("lockstep.mp3"));
 	
 	public int select = 0;
+	public boolean unbeat = false;
 	public int music;
 	int cnt;
 	
@@ -53,24 +57,50 @@ public class SelectScreen implements Screen{
 			kirby.dispose();
 			joker.dispose();
 			lockstep.dispose();
-			
+			dong.play();
 			rhythm.setScreen(new GameScreen(rhythm, select));
 		}
 		
 		if(Gdx.input.isKeyJustPressed(Keys.RIGHT)) {
+			ka.play();
 			if(select < 3) {
 				select++;
 				cnt = 0;
 			}			
 			
 		} else if(Gdx.input.isKeyJustPressed(Keys.LEFT)) {
+			ka.play();
 			if(select > 0) {
 				select--;
 				cnt = 0;
 			}
+		} else if(Gdx.input.isKeyJustPressed(Keys.UP)) {
+			ka.play();
+			if(unbeat == false) {
+				unbeat = true;
+			} else {
+				unbeat = false;
+			}
+			
+		} else if(Gdx.input.isKeyJustPressed(Keys.DOWN)) {
+			ka.play();
+			if(unbeat == false) {
+				unbeat = true;
+			} else {
+				unbeat = false;
+			}
+			
 		}
 		
 		rhythm.batch.begin();
+		
+		rhythm.batch.draw(new Texture("unbeat.png"), 10, rhythm.HEIGHT - 80);
+		
+		if(unbeat == false) {
+			rhythm.batch.draw(new Texture("false.png"), 250, rhythm.HEIGHT - 80);
+		} else if(unbeat == true) {
+			rhythm.batch.draw(new Texture("true.png"), 250 , rhythm.HEIGHT - 80);
+		}
 		
 		switch(select){
 		case 0:
