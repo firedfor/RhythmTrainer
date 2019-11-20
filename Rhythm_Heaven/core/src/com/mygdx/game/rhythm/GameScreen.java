@@ -10,16 +10,16 @@ import com.mygdx.game.RhythmHeaven;
 
 public class GameScreen implements Screen{
 	
-	Sound dong = Gdx.audio.newSound(Gdx.files.internal("dong.ogg"));
-	Sound ka = Gdx.audio.newSound(Gdx.files.internal("ka.ogg"));
+//	Sound dong = Gdx.audio.newSound(Gdx.files.internal("dong.ogg"));
+//	Sound ka = Gdx.audio.newSound(Gdx.files.internal("ka.ogg"));
 	Sound music = Gdx.audio.newSound(Gdx.files.internal("title.mp3"));
 	
 	Texture[] GameButton = new Texture[2];
 	public int score;
 	public float timer;
-	public float beat = 0.6f;
+//	public float beat = 0.6f;
 	public float touch;
-	public float songLength;
+	public float songLength = 30.0f;
 	public static int BUTTON_WIDTH = (int)(772 / 1.5);
 	public static int BUTTON_HEIGHT = (int)(531 / 1.5);
 	
@@ -38,7 +38,7 @@ public class GameScreen implements Screen{
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
-		
+		System.out.println();
 	}
 
 	@Override
@@ -53,8 +53,8 @@ public class GameScreen implements Screen{
 		
 		rhythm.batch.begin();
 		
-		if(timer > ((int)(timer / beat) * beat) - beat / 7 && timer < ((int)(timer / beat) * beat) + beat / 7){
-			fail = false;			
+		if(timer > ((int)(timer / beat) * beat) - beat / 10 && timer < ((int)(timer / beat) * beat) + beat / 10){
+			fail = false;	
 		}
 		
 		if(Gdx.input.isKeyPressed(Keys.ANY_KEY)){
@@ -82,17 +82,15 @@ public class GameScreen implements Screen{
 				fail = true;				
 			} 
 			
-			if(touch > (((int)(timer / beat) * beat) - beat / 4) && touch < (((int)(timer / beat) * beat) + beat / 4) && fail == false) {
+			if(touch > (((int)(timer / beat) * beat) - beat / 5) && touch < (((int)(timer / beat) * beat) + beat / 5) && fail == false) {
 				score += 2;
 				fail = true;
 				System.out.println("perfect");
-				System.out.println(fail);
 				System.out.println(score);
-			} else if(touch > (((int)(timer / beat) * beat) - beat / 2) && touch < (((int)(timer / beat) * beat) + beat / 2) && fail == false) {
+			} else if(touch > (((int)(timer / beat) * beat) - beat / 3) && touch < (((int)(timer / beat) * beat) + beat / 3) && fail == false) {
 				score += 1;
 				fail = true;
 				System.out.println("good");
-				System.out.println(fail);
 				System.out.println(score);
 			}
 		}

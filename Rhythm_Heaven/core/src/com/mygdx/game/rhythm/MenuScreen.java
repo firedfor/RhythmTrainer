@@ -115,11 +115,11 @@ public class MenuScreen implements Screen{
 		if(Gdx.input.isKeyJustPressed(Keys.ENTER)) {
 			switch(select) {
 			case 1:
-				rhythm.setScreen(new GameScreen(rhythm));
+				rhythm.setScreen(new SelectScreen(rhythm));
 				MenuSound.dispose();
 				break;
 			case 2:
-				rhythm.setScreen(new ScoreScreen(rhythm));
+				rhythm.setScreen(new ResultScreen(rhythm));
 				MenuSound.dispose();
 				break;
 			case 3:
