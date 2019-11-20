@@ -14,6 +14,7 @@ public class GameScreen implements Screen{
 	Texture[] GameButton = new Texture[2];
 	int select;
 	public float beat;
+	boolean unbeat;
 	
 	Sound pokemon = Gdx.audio.newSound(Gdx.files.internal("pokemon.mp3"));
 	Sound kirby = Gdx.audio.newSound(Gdx.files.internal("kirby.mp3"));
@@ -23,31 +24,40 @@ public class GameScreen implements Screen{
 	Sound dong = Gdx.audio.newSound(Gdx.files.internal("dong.ogg"));
 	Sound ka = Gdx.audio.newSound(Gdx.files.internal("ka.ogg"));
 	
-	public GameScreen(RhythmHeaven rhythm, int select) {
+	public GameScreen(RhythmHeaven rhythm, int select, boolean unbeat) {
 		this.rhythm = rhythm;
 		GameButton[0] = new Texture("GameButtonUn.png");
 		GameButton[1] = new Texture("GameButtonOn.png");
 		this.select = select;
+		this.unbeat = unbeat;   
 		
 		switch(select) {
 		case 0:
 			pokemon.play();
 			beat = 0.6741f;
+			if(unbeat == true)
+				beat += beat / 2;
 			break;
 		
 		case 1:
 			kirby.play();
 			beat = 0.7044f;
+			if(unbeat == true)
+				beat += beat / 2;
 			break;
 			
 		case 2:
 			joker.play();
 			beat = 0.6147f;
+			if(unbeat == true)
+				beat += beat / 2;
 			break;
 			
 		case 3:
 			lockstep.play();
 			beat = 0.3703f;
+			if(unbeat == true)
+				beat += beat / 2;
 			break;
 		}
 	}
@@ -121,9 +131,10 @@ public class GameScreen implements Screen{
 			}
 		}
 		rhythm.batch.end();
+//		System.out.println(unbeat);
 		
 		if(timer >= songLength) {
-			rhythm.setScreen(new ScoreScreen(rhythm, score, (int) (songLength / beat)));
+			rhythm.setScreen(new ScoreScreen(rhythm, score, (int) (songLength / beat), unbeat));
 		}
 	}
 

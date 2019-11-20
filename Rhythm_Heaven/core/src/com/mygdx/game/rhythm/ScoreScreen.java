@@ -10,11 +10,13 @@ public class ScoreScreen implements Screen{
 	RhythmHeaven rhythm;
 	int score;
 	int beat;
+	boolean unbeat;
 	
-	ScoreScreen(RhythmHeaven rhythm, int score, int beat){
+	ScoreScreen(RhythmHeaven rhythm, int score, int beat, boolean unbeat){
 		this.rhythm = rhythm;
 		this.score = score;
 		this.beat = beat;
+		this.unbeat = unbeat;
 	}
 
 	@Override

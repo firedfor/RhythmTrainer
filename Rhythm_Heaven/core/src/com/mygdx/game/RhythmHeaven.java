@@ -15,10 +15,10 @@ public class RhythmHeaven extends Game {
 	@Override
 	public void create() {
 		batch = new SpriteBatch();
-//		this.setScreen(new TitleScreen(this));
+		this.setScreen(new TitleScreen(this));
 //		this.setScreen(new MenuScreen(this));
 //		this.setScreen(new GameScreen(this));
-		this.setScreen(new SelectScreen(this));
+//		this.setScreen(new SelectScreen(this));
 	}
 	
 	@Override
