@@ -1,6 +1,8 @@
 package com.mygdx.game.rhythm;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.GL20;
 import com.mygdx.game.RhythmHeaven;
 
 public class ResultScreen implements Screen{
@@ -19,8 +21,8 @@ public class ResultScreen implements Screen{
 
 	@Override
 	public void render(float delta) {
-		// TODO Auto-generated method stub
-		
+		Gdx.gl.glClearColor(0.0f, 0.0f, 0.0f, 1);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 	}
 
 	@Override

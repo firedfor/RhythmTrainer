@@ -104,6 +104,7 @@ public class SelectScreen implements Screen{
 		
 		switch(select){
 		case 0:
+			rhythm.batch.draw(new Texture("blackspace2.png"),rhythm.WIDTH - 95 , rhythm.HEIGHT / 2 - HEIGHT / 2 + 280);
 			rhythm.batch.draw(new Texture("pokemon.png"), rhythm.WIDTH / 2 - WIDTH / 2 + 150, rhythm.HEIGHT / 2 - HEIGHT / 2 + 180, REAL_WIDTH, REAL_HEIGHT);
 			if(cnt == 0) {
 				pokemon.play();
@@ -115,6 +116,8 @@ public class SelectScreen implements Screen{
 			
 			break;
 		case 1:
+			rhythm.batch.draw(new Texture("blackspace.png"),0 , rhythm.HEIGHT / 2 - HEIGHT / 2 + 280);
+			rhythm.batch.draw(new Texture("blackspace2.png"),rhythm.WIDTH - 95 , rhythm.HEIGHT / 2 - HEIGHT / 2 + 280);
 			rhythm.batch.draw(new Texture("kirby.png"), rhythm.WIDTH / 2 - WIDTH / 2 + 150, rhythm.HEIGHT / 2 - HEIGHT / 2 + 180, REAL_WIDTH, REAL_HEIGHT);
 			if(cnt == 0) {
 				pokemon.pause();
@@ -127,6 +130,8 @@ public class SelectScreen implements Screen{
 			break;
 			
 		case 2:
+			rhythm.batch.draw(new Texture("blackspace.png"),0 , rhythm.HEIGHT / 2 - HEIGHT / 2 + 280);
+			rhythm.batch.draw(new Texture("blackspace2.png"),rhythm.WIDTH - 95 , rhythm.HEIGHT / 2 - HEIGHT / 2 + 280);
 			rhythm.batch.draw(new Texture("joker.png"), rhythm.WIDTH / 2 - WIDTH / 2 + 150, rhythm.HEIGHT / 2 - HEIGHT / 2 + 180, REAL_WIDTH, REAL_HEIGHT);
 			if(cnt == 0) {
 				pokemon.pause();
@@ -139,6 +144,7 @@ public class SelectScreen implements Screen{
 			break;
 			
 		case 3:
+			rhythm.batch.draw(new Texture("blackspace.png"),0 , rhythm.HEIGHT / 2 - HEIGHT / 2 + 280);
 			rhythm.batch.draw(new Texture("lockstep.png"), rhythm.WIDTH / 2 - WIDTH / 2 + 150, rhythm.HEIGHT / 2 - HEIGHT / 2 + 180, REAL_WIDTH, REAL_HEIGHT);
 			if(cnt == 0) {
 				pokemon.pause();

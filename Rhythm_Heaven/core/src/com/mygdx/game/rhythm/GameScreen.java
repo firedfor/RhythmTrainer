@@ -55,7 +55,7 @@ public class GameScreen implements Screen{
 			
 		case 3:
 			lockstep.play();
-			beat = 0.3703f;
+			beat = 0.3703f * 2.0f;
 			if(unbeat == true)
 				beat += beat / 2;
 			break;
@@ -98,6 +98,13 @@ public class GameScreen implements Screen{
 		} else {
 			rhythm.batch.draw(GameButton[0], rhythm.WIDTH / 2 - BUTTON_WIDTH / 2, (rhythm.HEIGHT / 2 - BUTTON_HEIGHT / 2) - 50, BUTTON_WIDTH, BUTTON_HEIGHT);
 		}
+		
+		
+//		if(timer % beat >= 0 && timer % beat < 0.1) {
+//			rhythm.batch.draw(new Texture("badlogic.jpg"), 0,0);
+//		}
+		
+		
 		
 		if(Gdx.input.isKeyJustPressed(Keys.ANY_KEY)) {
 
