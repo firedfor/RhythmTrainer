@@ -11,12 +11,9 @@ import com.mygdx.game.RhythmHeaven;
 public class ScoreScreen implements Screen{
 	
 	RhythmHeaven rhythm;
-	int score;
-	int beat;
-	boolean unbeat;
-	int finalScore;
 	float timer;
 	int cnt = 0;
+	int finalScore;
 	
 	Sound load = Gdx.audio.newSound(Gdx.files.internal("resultLoad.mp3"));
 	Sound Final = Gdx.audio.newSound(Gdx.files.internal("resultFinal.mp3"));
@@ -26,29 +23,27 @@ public class ScoreScreen implements Screen{
 	Sound OK = Gdx.audio.newSound(Gdx.files.internal("OK.mp3"));
 	Sound superb = Gdx.audio.newSound(Gdx.files.internal("superb.mp3"));
 	
-	ScoreScreen(RhythmHeaven rhythm, int score, int beat, boolean unbeat){
+	public ScoreScreen(RhythmHeaven rhythm, int score, int beat){
 		this.rhythm = rhythm;
-		this.score = score;
-		this.beat = beat;
-		this.unbeat = unbeat;
-		finalScore =(int) ((score / beat) * 100);
+		this.finalScore = (int) (((float)score / beat) * 100);
 	}
 	
 	public ScoreScreen(RhythmHeaven rhythm){
 		this.rhythm = rhythm;
-		finalScore = 100;
 	}
 
 	@Override
 	public void show() {
-		// TODO Auto-generated method stub
+//		System.out.println(finalScore);
 		
 	}
+	
 
 	@Override
 	public void render(float delta) {
 		
 		timer += delta;
+		
 		
 		Gdx.gl.glClearColor(0.0f, 0.0f, 0.0f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -64,7 +59,44 @@ public class ScoreScreen implements Screen{
 			rhythm.batch.draw(new Texture("simjung.png"), 45, rhythm.HEIGHT - 134);
 		}
 		
-		if(finalScore < 50) {
+		if(finalScore == 0) {
+			
+			if(timer > 3.5) {
+				
+				if(cnt == 1) {
+					load.play();
+					cnt++;
+				}
+				
+				rhythm.batch.draw(new Texture("score0_1.png"), 250, rhythm.HEIGHT - 350);
+				
+			} if (timer > 5.0) {
+				
+				if(cnt == 2) {
+					Final.play();
+					cnt++;
+				}
+				
+				rhythm.batch.draw(new Texture("score0_2.png"), 200, rhythm.HEIGHT - 430);
+				
+			} if (timer > 7.0) {
+				
+				if(cnt == 3) {
+					tryAgain.play();
+					cnt++;
+				}
+			
+				
+				rhythm.batch.draw(new Texture("tryagain.png"), rhythm.WIDTH - 547, 45);
+				
+				if(Gdx.input.isKeyJustPressed(Keys.ENTER)) {
+					next.play();
+					tryAgain.dispose();
+					rhythm.setScreen(new ResultScreen(rhythm, 0));
+				}
+			}			
+			
+		} else if(finalScore < 50) {
 			
 			if(timer > 3.5) {
 				
@@ -90,15 +122,16 @@ public class ScoreScreen implements Screen{
 					tryAgain.play();
 					cnt++;
 				}
-			}
+			
 				
 				rhythm.batch.draw(new Texture("tryagain.png"), rhythm.WIDTH - 547, 45);
 				
 				if(Gdx.input.isKeyJustPressed(Keys.ENTER)) {
 					next.play();
 					tryAgain.dispose();
-					rhythm.setScreen(new ResultScreen(rhythm));
+					rhythm.setScreen(new ResultScreen(rhythm, 0));
 				}
+			}
 		}
 		
 		else if(finalScore < 60) {
@@ -133,12 +166,12 @@ public class ScoreScreen implements Screen{
 					if(Gdx.input.isKeyJustPressed(Keys.ENTER)) {
 						next.play();
 						tryAgain.dispose();
-						rhythm.setScreen(new ResultScreen(rhythm));
+						rhythm.setScreen(new ResultScreen(rhythm, 0));
 					}
 				}
 		}
 		
-		else if(finalScore < 70) {
+		else if(finalScore < 90) {
 			
 			if(timer > 3.5) {
 					
@@ -170,12 +203,12 @@ public class ScoreScreen implements Screen{
 				if(Gdx.input.isKeyJustPressed(Keys.ENTER)) {
 					next.play();
 					OK.dispose();
-					rhythm.setScreen(new ResultScreen(rhythm));
+					rhythm.setScreen(new ResultScreen(rhythm, 1));
 				}
 			}
 		}
 		
-		else if(finalScore < 80) {
+		else if(finalScore < 100) {
 			
 			if(timer > 3.5) {
 					
@@ -207,7 +240,7 @@ public class ScoreScreen implements Screen{
 				if(Gdx.input.isKeyJustPressed(Keys.ENTER)) {
 					next.play();
 					OK.dispose();
-					rhythm.setScreen(new ResultScreen(rhythm));
+					rhythm.setScreen(new ResultScreen(rhythm, 1));
 				}
 			}
 		}
@@ -244,7 +277,7 @@ public class ScoreScreen implements Screen{
 				if(Gdx.input.isKeyJustPressed(Keys.ENTER)) {
 					next.play();
 					superb.dispose();
-					rhythm.setScreen(new ResultScreen(rhythm));
+					rhythm.setScreen(new ResultScreen(rhythm, 2));
 				}
 			}
 		}

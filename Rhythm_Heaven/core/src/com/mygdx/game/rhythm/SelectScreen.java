@@ -59,6 +59,13 @@ public class SelectScreen implements Screen{
 			lockstep.dispose();
 			dong.play();
 			rhythm.setScreen(new GameScreen(rhythm, select, unbeat));
+		} else if(Gdx.input.isKeyPressed(Keys.ESCAPE)) {
+			pokemon.dispose();
+			kirby.dispose();
+			joker.dispose();
+			lockstep.dispose();
+			
+			rhythm.setScreen(new MenuScreen(rhythm));
 		}
 		
 		if(Gdx.input.isKeyJustPressed(Keys.RIGHT)) {

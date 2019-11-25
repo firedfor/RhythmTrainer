@@ -14,6 +14,7 @@ public class GameScreen implements Screen{
 	Texture[] GameButton = new Texture[2];
 	int select;
 	public float beat;
+	public float realbeat;
 	boolean unbeat;
 	
 	Sound pokemon = Gdx.audio.newSound(Gdx.files.internal("pokemon.mp3"));
@@ -34,28 +35,28 @@ public class GameScreen implements Screen{
 		switch(select) {
 		case 0:
 			pokemon.play();
-			beat = 0.6741f;
+			realbeat = beat = 0.6741f;
 			if(unbeat == true)
 				beat += beat / 2;
 			break;
 		
 		case 1:
 			kirby.play();
-			beat = 0.7044f;
+			realbeat = beat = 0.7044f;
 			if(unbeat == true)
 				beat += beat / 2;
 			break;
 			
 		case 2:
 			joker.play();
-			beat = 0.6147f;
+			realbeat = beat = 0.6147f;
 			if(unbeat == true)
 				beat += beat / 2;
 			break;
 			
 		case 3:
 			lockstep.play();
-			beat = 0.3703f * 2.0f;
+			realbeat = beat = 0.3703f * 2.0f;
 			if(unbeat == true)
 				beat += beat / 2;
 			break;
@@ -93,7 +94,7 @@ public class GameScreen implements Screen{
 			fail = false;	
 		}
 		
-		if(Gdx.input.isKeyPressed(Keys.ANY_KEY)){
+		if(Gdx.input.isKeyPressed(Keys.A)){
 			rhythm.batch.draw(GameButton[1], rhythm.WIDTH / 2 - BUTTON_WIDTH / 2, (rhythm.HEIGHT / 2 - BUTTON_HEIGHT / 2) - 50, BUTTON_WIDTH, BUTTON_HEIGHT);
 		} else {
 			rhythm.batch.draw(GameButton[0], rhythm.WIDTH / 2 - BUTTON_WIDTH / 2, (rhythm.HEIGHT / 2 - BUTTON_HEIGHT / 2) - 50, BUTTON_WIDTH, BUTTON_HEIGHT);
@@ -101,12 +102,13 @@ public class GameScreen implements Screen{
 		
 		
 //		if(timer % beat >= 0 && timer % beat < 0.1) {
-//			rhythm.batch.draw(new Texture("badlogic.jpg"), 0,0);
+//
+//			System.out.println((int) ((songLength / beat) * 2));
 //		}
 		
 		
 		
-		if(Gdx.input.isKeyJustPressed(Keys.ANY_KEY)) {
+		if(Gdx.input.isKeyJustPressed(Keys.A)) {
 
 			touch = timer;
 			
@@ -125,23 +127,24 @@ public class GameScreen implements Screen{
 				fail = true;				
 			} 
 			
-			if(touch > (((int)(timer / beat) * beat) - beat / 5) && touch < (((int)(timer / beat) * beat) + beat / 5) && fail == false) {
+			if(touch > (((int)(timer / beat) * beat) - beat / 4) && touch < (((int)(timer / beat) * beat) + beat / 4) && fail == false) {
 				score += 2;
 				fail = true;
-				System.out.println("perfect");
-				System.out.println(score);
-			} else if(touch > (((int)(timer / beat) * beat) - beat / 3) && touch < (((int)(timer / beat) * beat) + beat / 3) && fail == false) {
+//				System.out.println("perfect");
+//				System.out.println(score);
+			} else if(touch > (((int)(timer / beat) * beat) - beat / 2) && touch < (((int)(timer / beat) * beat) + beat / 2) && fail == false) {
 				score += 1;
 				fail = true;
-				System.out.println("good");
-				System.out.println(score);
+//				System.out.println("good");
+//				System.out.println(score);
 			}
 		}
+		
+		
 		rhythm.batch.end();
-//		System.out.println(unbeat);
 		
 		if(timer >= songLength) {
-			rhythm.setScreen(new ScoreScreen(rhythm, score, (int) (songLength / beat), unbeat));
+			rhythm.setScreen(new ScoreScreen(rhythm, score, (int)((songLength / realbeat)) * 2 ));
 		}
 	}
 

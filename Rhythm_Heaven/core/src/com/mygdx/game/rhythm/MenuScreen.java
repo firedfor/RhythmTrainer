@@ -119,7 +119,7 @@ public class MenuScreen implements Screen{
 				MenuSound.dispose();
 				break;
 			case 2:
-				rhythm.setScreen(new ResultScreen(rhythm));
+				rhythm.setScreen(new ScoreScreen(rhythm));
 				MenuSound.dispose();
 				break;
 			case 3:
