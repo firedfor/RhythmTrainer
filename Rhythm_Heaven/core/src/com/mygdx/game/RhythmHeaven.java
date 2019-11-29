@@ -13,6 +13,8 @@ public class RhythmHeaven extends Game {
 	public static final int WIDTH = 1080;
 	public static final int HEIGHT = 720;
 	
+	public int finalScore;
+	
 	public static SpriteBatch batch;
 	
 	@Override

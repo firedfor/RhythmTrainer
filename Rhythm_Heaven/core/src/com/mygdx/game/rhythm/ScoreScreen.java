@@ -26,15 +26,17 @@ public class ScoreScreen implements Screen{
 	public ScoreScreen(RhythmHeaven rhythm, int score, int beat){
 		this.rhythm = rhythm;
 		this.finalScore = (int) (((float)score / beat) * 100);
+		rhythm.finalScore = this.finalScore;
 	}
 	
 	public ScoreScreen(RhythmHeaven rhythm){
 		this.rhythm = rhythm;
+		this.finalScore = rhythm.finalScore;
 	}
 
 	@Override
 	public void show() {
-//		System.out.println(finalScore);
+		System.out.println(finalScore);
 		
 	}
 	
@@ -171,7 +173,7 @@ public class ScoreScreen implements Screen{
 				}
 		}
 		
-		else if(finalScore < 90) {
+		else if(finalScore < 70) {
 			
 			if(timer > 3.5) {
 					
@@ -208,7 +210,7 @@ public class ScoreScreen implements Screen{
 			}
 		}
 		
-		else if(finalScore < 100) {
+		else if(finalScore < 80) {
 			
 			if(timer > 3.5) {
 					

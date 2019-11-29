@@ -61,7 +61,7 @@ public class TitleScreen implements Screen{
 			RhythmHeaven.batch.draw(new Texture("TextPress.png"), RhythmHeaven.WIDTH / 2, 50, TEXT_WIDTH, TEXT_HEIGHT);
 			
 			
-			if(Gdx.input.isKeyPressed(Input.Keys.ANY_KEY)) {
+			if(Gdx.input.isKeyPressed(Keys.ANY_KEY)) {
 				sound.dispose();
 				rhythm.setScreen(new MenuScreen(rhythm));
 			}

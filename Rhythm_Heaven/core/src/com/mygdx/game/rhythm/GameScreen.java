@@ -70,8 +70,8 @@ public class GameScreen implements Screen{
 	public static int BUTTON_WIDTH = (int)(772 / 1.5);
 	public static int BUTTON_HEIGHT = (int)(531 / 1.5);
 	
-	boolean effectSound = false;
 	boolean fail = false;	
+	char key;
 
 	@Override
 	public void show() {
@@ -94,7 +94,7 @@ public class GameScreen implements Screen{
 			fail = false;	
 		}
 		
-		if(Gdx.input.isKeyPressed(Keys.A)){
+		if(Gdx.input.isKeyPressed(Keys.F) || Gdx.input.isKeyPressed(Keys.D)){
 			rhythm.batch.draw(GameButton[1], rhythm.WIDTH / 2 - BUTTON_WIDTH / 2, (rhythm.HEIGHT / 2 - BUTTON_HEIGHT / 2) - 50, BUTTON_WIDTH, BUTTON_HEIGHT);
 		} else {
 			rhythm.batch.draw(GameButton[0], rhythm.WIDTH / 2 - BUTTON_WIDTH / 2, (rhythm.HEIGHT / 2 - BUTTON_HEIGHT / 2) - 50, BUTTON_WIDTH, BUTTON_HEIGHT);
@@ -108,36 +108,22 @@ public class GameScreen implements Screen{
 		
 		
 		
-		if(Gdx.input.isKeyJustPressed(Keys.A)) {
+		if(Gdx.input.isKeyJustPressed(Keys.F)) {
 
 			touch = timer;
-			
-			// 효과음 부분			
-			if(effectSound == false) {
-				dong.play();
-				effectSound = true;
+		
+			dong.play();
 				
-			} else {
-				ka.play(); 
-				effectSound = false;
-			}
+			judgment(touch);
 			
-			// 판정 부분
-			if(touch < (((int)(timer / beat) * beat) - beat / 2) && touch > (((int)(timer / beat) * beat) - beat)){
-				fail = true;				
-			} 
+		} else if(Gdx.input.isKeyJustPressed(Keys.D)) {
+
+			touch = timer;
+		
+			ka.play();
+				
+			judgment(touch);
 			
-			if(touch > (((int)(timer / beat) * beat) - beat / 4) && touch < (((int)(timer / beat) * beat) + beat / 4) && fail == false) {
-				score += 2;
-				fail = true;
-//				System.out.println("perfect");
-//				System.out.println(score);
-			} else if(touch > (((int)(timer / beat) * beat) - beat / 2) && touch < (((int)(timer / beat) * beat) + beat / 2) && fail == false) {
-				score += 1;
-				fail = true;
-//				System.out.println("good");
-//				System.out.println(score);
-			}
 		}
 		
 		
@@ -175,6 +161,33 @@ public class GameScreen implements Screen{
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
+		
+	}
+	
+	public void judgment(float touch) {
+		
+		System.out.println(fail);
+		
+		if(touch < (((int)(timer / beat) * beat) - (beat / 1.9)) && touch > (((int)(timer / beat) * beat) - (beat / 1.1))){
+			fail = true;				
+		}
+		
+		else if(touch > (((int)(timer / beat) * beat) - beat / 4) && touch < (((int)(timer / beat) * beat) + beat / 4) && fail == false) {
+			score += 2;
+			fail = true;
+			System.out.println("perfect");
+			System.out.println(fail);
+			System.out.println(score);
+		} 
+		
+		else if(touch > (((int)(timer / beat) * beat) - beat / 2) && touch < (((int)(timer / beat) * beat) + beat / 2) && fail == false) {
+			score += 1;
+			fail = true;
+			System.out.println("good");
+			System.out.println(fail);
+			System.out.println(score);
+		}
+		
 		
 	}
 
