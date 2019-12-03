@@ -1,2 +1,2 @@
-# RhythmHeaven
- Rhythm Traning program with LibGDX
+# Rhythm Training
+Rhythm Training program with LibGDX
