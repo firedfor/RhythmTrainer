@@ -36,7 +36,7 @@ public class ScoreScreen implements Screen{
 
 	@Override
 	public void show() {
-		System.out.println(finalScore);
+//		System.out.println(finalScore);
 		
 	}
 	

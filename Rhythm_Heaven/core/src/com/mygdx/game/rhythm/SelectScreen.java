@@ -52,7 +52,7 @@ public class SelectScreen implements Screen{
 		Gdx.gl.glClearColor(1.0f, 1.0f, 1.0f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
-		if(Gdx.input.isKeyJustPressed(Keys.ENTER)) {
+		if(Gdx.input.isKeyJustPressed(Keys.F) || Gdx.input.isKeyJustPressed(Keys.J)) {
 			pokemon.dispose();
 			kirby.dispose();
 			joker.dispose();
@@ -66,30 +66,21 @@ public class SelectScreen implements Screen{
 			lockstep.dispose();
 			
 			rhythm.setScreen(new MenuScreen(rhythm));
-		}
-		
-		if(Gdx.input.isKeyJustPressed(Keys.RIGHT)) {
+			
+		} else if(Gdx.input.isKeyJustPressed(Keys.K)) {
 			ka.play();
 			if(select < 3) {
 				select++;
 				cnt = 0;
 			}			
 			
-		} else if(Gdx.input.isKeyJustPressed(Keys.LEFT)) {
+		} else if(Gdx.input.isKeyJustPressed(Keys.D)) {
 			ka.play();
 			if(select > 0) {
 				select--;
 				cnt = 0;
 			}
-		} else if(Gdx.input.isKeyJustPressed(Keys.UP)) {
-			ka.play();
-			if(unbeat == false) {
-				unbeat = true;
-			} else {
-				unbeat = false;
-			}
-			
-		} else if(Gdx.input.isKeyJustPressed(Keys.DOWN)) {
+		} else if(Gdx.input.isKeyJustPressed(Keys.UP) || Gdx.input.isKeyJustPressed(Keys.DOWN)) {
 			ka.play();
 			if(unbeat == false) {
 				unbeat = true;

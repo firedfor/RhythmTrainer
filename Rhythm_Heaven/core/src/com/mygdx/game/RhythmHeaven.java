@@ -24,7 +24,7 @@ public class RhythmHeaven extends Game {
 //		this.setScreen(new MenuScreen(this));
 //		this.setScreen(new GameScreen(this));
 //		this.setScreen(new SelectScreen(this));
-//		this.setScreen(new ScoreScreen(this, 0, 5000));
+//		this.setScreen(new ScoreScreen(this, 200000000, 100));
 //		this.setScreen(new ResultScreen(this, 2));
 	}
 	

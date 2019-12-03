@@ -166,7 +166,7 @@ public class GameScreen implements Screen{
 	
 	public void judgment(float touch) {
 		
-		System.out.println(fail);
+//		System.out.println(fail);
 		
 		if(touch < (((int)(timer / beat) * beat) - (beat / 1.9)) && touch > (((int)(timer / beat) * beat) - (beat / 1.1))){
 			fail = true;				
@@ -175,19 +175,18 @@ public class GameScreen implements Screen{
 		else if(touch > (((int)(timer / beat) * beat) - beat / 4) && touch < (((int)(timer / beat) * beat) + beat / 4) && fail == false) {
 			score += 2;
 			fail = true;
-			System.out.println("perfect");
-			System.out.println(fail);
-			System.out.println(score);
+//			System.out.println("perfect");
+//			System.out.println(fail);
+//			System.out.println(score);
 		} 
 		
 		else if(touch > (((int)(timer / beat) * beat) - beat / 2) && touch < (((int)(timer / beat) * beat) + beat / 2) && fail == false) {
 			score += 1;
 			fail = true;
-			System.out.println("good");
-			System.out.println(fail);
-			System.out.println(score);
+//			System.out.println("good");
+//			System.out.println(fail);
+//			System.out.println(score);
 		}
-		
 		
 	}
 
